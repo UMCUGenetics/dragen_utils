@@ -1,4 +1,3 @@
-import glob
 import gzip
 from pathlib import Path
 
@@ -16,7 +15,7 @@ def get_fastq_metadata(fastq_file: Path) -> dict:
     Returns:
         Dictionary containing sample ID, machine, run, flowcell, and lane.
     """
-    sample_id = fastq_file.split("_")[0]
+    sample_id = fastq_file.name.split("_")[0]
 
     with gzip.open(fastq_file, "rt") as f:
         fastq_data = f.readline().strip().split(":")
@@ -62,9 +61,9 @@ def get_rg_lb(fastq_metadata: dict) -> str:
 
 
 @cli.command("fastq_list")
-def main():
+def main(directory: Path = Path(".")) -> None:
     """Main function to find fastq files and generate a CSV file with read group information."""
-    r1_fastq_files = sorted(glob.glob("*_R1_*.fastq.gz"))
+    r1_fastq_files = sorted(directory.glob("*_R1_*.fastq.gz"))
     fastq_pairs = []
 
     for r1_fastq_file in r1_fastq_files:
@@ -75,8 +74,8 @@ def main():
             "RGLB": get_rg_lb(fastq_metadata),
             "RGPL": "ILLUMINA",
             "Lane": fastq_metadata["lane"],
-            "Read1File": r1_fastq_file,
-            "Read2File": r1_fastq_file.replace("_R1_", "_R2_"),
+            "Read1File": r1_fastq_file.name,
+            "Read2File": r1_fastq_file.name.replace("_R1_", "_R2_"),
         }
         fastq_pairs.append(fastq_pair)
 

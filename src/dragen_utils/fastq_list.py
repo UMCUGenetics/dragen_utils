@@ -62,7 +62,7 @@ def get_rg_lb(fastq_metadata: dict) -> str:
 
 @cli.command("fastq_list")
 def main(directory: Path = Path(".")) -> None:
-    """Main function to find fastq files and generate a CSV file with read group information.
+    """Main function to find fastq files and generate a CSV file which can be used as input for DRAGEN (--fastq-list)
 
     Args:
         directory: Directory to search for fastq files. Defaults to the current directory.

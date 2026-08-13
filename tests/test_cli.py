@@ -1,4 +1,4 @@
-from python_template import cli
+from dragen_utils import cli
 
 
 def test_get_hello_msg():

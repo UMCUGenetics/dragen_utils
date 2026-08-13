@@ -30,8 +30,10 @@ def parse_dragen_metrics_csv(metrics_csv: Path, metric_description: str) -> str:
 
 def transform_karyotype_value(dragen_karyotype: str) -> str:
     """Transform DRAGEN ploidy estimation value karyotype to 'man', 'vrouw', or 'onbekend'. To avoid incidental findings.
+
     Args:
         karyotype: Karyotype string from DRAGEN.
+
     Returns:
         The translated sex label ('man', 'vrouw' or 'onbekend').
     """
@@ -54,8 +56,7 @@ def main(
     ploidy_estimation_metrics_csv: Path,
     callability_metrics_csv: Path,
 ) -> None:
-    """
-    Main function to parse dragen QC metrics csv files and generate a CSV file with QC values used to asses quality of diagnostic samples.
+    """Main function to parse dragen QC metrics csv files and generate a CSV file with QC values used to asses quality of diagnostic samples.
 
     Args:
         sample_id: Sample ID to use for output file naming.

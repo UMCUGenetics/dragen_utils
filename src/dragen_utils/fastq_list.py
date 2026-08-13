@@ -62,7 +62,11 @@ def get_rg_lb(fastq_metadata: dict) -> str:
 
 @cli.command("fastq_list")
 def main(directory: Path = Path(".")) -> None:
-    """Main function to find fastq files and generate a CSV file with read group information."""
+    """Main function to find fastq files and generate a CSV file with read group information.
+
+    Args:
+        directory: Directory to search for fastq files. Defaults to the current directory.
+    """
     r1_fastq_files = sorted(directory.glob("*_R1_*.fastq.gz"))
     fastq_pairs = []
 

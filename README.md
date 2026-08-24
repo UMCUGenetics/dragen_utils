@@ -1,4 +1,4 @@
-# python_template
+# Dragen utils
 
 ![test](https://github.com/UMCUGenetics/dragen_utils/actions/workflows/test.yml/badge.svg)
 ![lint](https://github.com/UMCUGenetics/dragen_utils/actions/workflows/lint.yml/badge.svg)
@@ -52,8 +52,6 @@ uv run ruff format src tests
 ### GitHub Actions
 
 This repository contains two GitHub actions workflows (`.github/workflos/`): `lint.yml` and `test.yml`. The lint workflow uses the [ruff-action](https://github.com/astral-sh/ruff-action) action to run ruff. The test workflow uses the [setup-uv action](https://github.com/astral-sh/setup-uv) to setup uv, install dependencies and run tests. Both actions are configured to run on each pull request and push to main and develop.
-
-TODO: Add container image documentation
 
 ### pre-commit
 

@@ -1,46 +1,58 @@
-# python_template
+# Dragen utils
 
-![test](https://github.com/UMCUGenetics/python_template/actions/workflows/test.yml/badge.svg)
-![lint](https://github.com/UMCUGenetics/python_template/actions/workflows/lint.yml/badge.svg)
+![test](https://github.com/UMCUGenetics/dragen_utils/actions/workflows/test.yml/badge.svg)
+![lint](https://github.com/UMCUGenetics/dragen_utils/actions/workflows/lint.yml/badge.svg)
 
-Python template project - This repository can be used as a starting point / guide on how to setup a python repository, including automated tests and code formatting.
+Utility commands for nextflow pipelines using Illumina Dragen, bundled as a single installable package.
 
-## GitHub repository creation
+## Commands
 
-- Repository name: `Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability. Python packages should also have short, all-lowercase names, although the use of underscores is discouraged.`
-- Add README
-- Add .gitignore: `python`
-- Add License: `MIT`
+| Command                   | Description                                                            | NF module                                                                                                                        |
+| ------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `dragen-utils fastq_list` | Generate csv file which can be used as input for Dragen --fastq-list   | [dragenutils/fastqlist](https://github.com/UMCUGenetics/NF-Modules/tree/main/modules/UMCUGenetics/dragenutils/fastqlist/main.nf) |
+| `dragen-utils dx_qc`      | Generate csv file with QC statistics relevant for diagnostic sample QC | [dragenutils/dxqc](https://github.com/UMCUGenetics/NF-Modules/tree/main/modules/UMCUGenetics/dragenutils/dxqc/main.nf)           |
 
-Make sure to perform the following actions, after creating a new github repo:
+## Container image
 
-- Create a develop branch.
-- Configure branch protection rules.
-
-## UV
-
-UV supports packaged and unpackaged applications, this repository show cases a packaged application initiated with the command: `uv init --package .`. To create a simpler unpackaged application use: `uv init .`. Unpackaged applications can be used for single file scripts/tools, while packaged applications are used for (larger) tools requiring multiple files, distribution (pip) and tests separation.
-
-Setup uv package and development dependencies:
+Each release publishes a multi-arch image to `ghcr.io/umcugenetics/dragen-utils:<version>`, built from `uv.lock` so the dependency set is exactly
+the one the tests ran against. This is what the `dragenutils` Nextflow modules pin their `container` directive to.
 
 ```sh
-uv init --package .
-uv add --dev ruff
-uv add --dev pytest
+docker run ghcr.io/umcugenetics/dragen-utils:1.0.0 dragen-utils --version
 ```
 
-Run pytest and the python-template tool:
+Singularity pulls the same image directly:
 
 ```sh
+singularity exec docker://ghcr.io/umcugenetics/prs-utils:1.0.0 dragen-utils --version
+```
+
+Build it locally without publishing:
+
+```sh
+docker build -t dragen-utils:dev .
+```
+
+## Development
+
+Setup and run the test suite:
+
+```sh
+uv sync
 uv run pytest tests
-uv run python-template World
-uv run python-template --help
 ```
 
-## GitHub Actions
+Linting and formatting use [Ruff](https://docs.astral.sh/ruff/):
 
-This template project contains two GitHub actions workflows (`.github/workflos/`): `lint.yml` and `test.yml`. The lint workflow uses the [ruff-action](https://github.com/astral-sh/ruff-action) action to run ruff. The test workflow uses the [setup-uv action](https://github.com/astral-sh/setup-uv) to setup uv, install dependencies and run tests. Both actions are configured to run on each pull request and push to main and develop.
+```sh
+uv run ruff check src tests
+uv run ruff format src tests
+```
 
-## pre-commit
+### GitHub Actions
+
+This repository contains two GitHub actions workflows (`.github/workflos/`): `lint.yml` and `test.yml`. The lint workflow uses the [ruff-action](https://github.com/astral-sh/ruff-action) action to run ruff. The test workflow uses the [setup-uv action](https://github.com/astral-sh/setup-uv) to setup uv, install dependencies and run tests. Both actions are configured to run on each pull request and push to main and develop.
+
+### pre-commit
 
 Git pre-commit hooks enable you to run certain commands before each commit and can be used to check code style before committing. The file `.pre-commit-config.yaml` contains the [Ruff](https://docs.astral.sh/ruff/) [pre-commit](https://pre-commit.com) hook, which will automatically run Ruff before each commit. Run the following command to install the git commit hook: `uvx pre-commit install`.

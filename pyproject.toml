@@ -1,7 +1,7 @@
 [project]
-name = "python-template"
-version = "0.1.0"
-description = "Python template project."
+name = "dragen-utils"
+version = "1.0.0"
+description = "Utility commands for pipelines using Illumina Dragen, bundled as a single installable package."
 readme = "README.md"
 authors = [
     { name = "Bioinformatica Genetica", email = "bioinformatica-genetica@umcutrecht.nl" }
@@ -15,11 +15,12 @@ dependencies = [
 dev = [
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
+    "pytest-mock>=3.15.1",
     "ruff>=0.15.20",
 ]
 
 [project.scripts]
-python-template = "python_template.cli:cli"
+dragen-utils = "dragen_utils.cli:cli"
 
 [build-system]
 requires = ["uv_build>=0.11.27,<0.12"]

@@ -1,3 +1,8 @@
+"""Top-level CLI for the dragen-utils package.
+
+This module defines the Typer application for the DRAGEN-related utilities exposed by the package.
+"""
+
 from importlib.metadata import version as package_version
 from typing import Annotated
 
@@ -11,7 +16,9 @@ cli.add_typer(dx_qc.cli)
 
 
 def _version_callback(show_version: bool) -> None:
-    """Version callback for the CLI. If `show_version` is True, prints the package version and exits.
+    """Version callback for the CLI.
+
+    If `show_version` is True, prints the package version and exits.
     The Nextflow modules capture this output into their `versions` topic, so it must be the bare version and nothing else.
 
     Args:

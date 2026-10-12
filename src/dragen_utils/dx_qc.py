@@ -23,7 +23,7 @@ def parse_dragen_metrics_csv(metrics_csv: Path, metric_description: str) -> str:
     csv_description_idx = 2
     csv_value_idx = 3
 
-    with open(metrics_csv, "r") as file:
+    with Path(metrics_csv).open("r") as file:
         reader = csv.reader(file)
         for row in reader:
             if row and row[csv_description_idx] == metric_description:

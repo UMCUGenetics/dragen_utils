@@ -16,7 +16,7 @@ def test_fastq_list(mocker: MockerFixture) -> None:
     result = runner.invoke(cli.cli, ["fastq_list"])
 
     assert result.exit_code == 0
-    mock_callback.assert_called_once_with(directory=Path("."))
+    mock_callback.assert_called_once_with(directory=Path())
 
 
 def test_dx_qc(mocker: MockerFixture) -> None:

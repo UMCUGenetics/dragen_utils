@@ -29,7 +29,6 @@ def _cli_options(
     ] = False,
 ) -> None:
     """Dragen-utils is a collection of utilities for working with Illumina DRAGEN."""
-    pass
 
 
 if __name__ == "__main__":

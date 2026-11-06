@@ -3,11 +3,12 @@ from typing import Annotated
 
 import typer
 
-from dragen_utils import dx_qc, fastq_list
+from dragen_utils import dx_qc, fastq_list, igv_session
 
 cli = typer.Typer()
 cli.add_typer(fastq_list.cli)
 cli.add_typer(dx_qc.cli)
+cli.add_typer(igv_session.cli)
 
 
 def _version_callback(show_version: bool) -> None:

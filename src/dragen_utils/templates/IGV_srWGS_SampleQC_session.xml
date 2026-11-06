@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Session genome="hg38" locus="chr1:0-248956422" version="8">
+    <Resources>
+        <Resource path="{{ sample }}.bam" type="bam"/>
+        <Resource path="{{ sample }}.tn.bw" type="bw"/>
+        <Resource path="{{ sample }}.hard-filtered.baf.bw" type="bw"/>
+    </Resources>
+    <Panel height="264" name="PanelProbandProbeRatio" width="1901">
+        <Track altColor="255,102,0" attributeKey="{{ sample }}.tn.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" color="0,0,255" fontSize="10" height="250" id="{{ sample }}.tn.bw" name="{{ sample }}.tn.bw" renderer="SCATTER_PLOT" visible="true" windowFunction="mean">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="2.0" minimum="-3.0" type="LINEAR"/>
+        </Track>
+    </Panel>
+    <Panel height="999" name="BAF plot" width="1901">
+        <Track attributeKey="{{ sample }}.baf.bw" autoScale="false" clazz="org.broad.igv.track.DataSourceTrack" colorScale="ContinuousColorScale;0.0;1.0;255,255,255;0,0,178" fontSize="10" height="200" id="{{ sample }}.hard-filtered.baf.bw" name="{{ sample }}.hard-filtered.baf.bw" renderer="SCATTER_PLOT" visible="true" windowFunction="none">
+            <DataRange baseline="0.5" drawBaseline="true" flipAxis="false" maximum="1.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="{{ sample }}.bam Coverage" autoScale="false" clazz="org.broad.igv.sam.CoverageTrack" color="175,175,175" fontSize="10" id="{{ sample }}.bam_coverage" name="{{ sample }}.bam Coverage" snpThreshold="0.2" visible="true">
+            <DataRange baseline="0.0" drawBaseline="true" flipAxis="false" maximum="60.0" minimum="0.0" type="LINEAR"/>
+        </Track>
+        <Track attributeKey="{{ sample }}.bam" clazz="org.broad.igv.sam.AlignmentTrack" color="185,185,185" experimentType="OTHER" fontSize="10" id="{{ sample }}.bam" name="{{ sample }}.bam" visible="true">
+            <RenderOptions duplicatesOption="FILTER" viewPairs="true"/>
+        </Track>
+    </Panel>
+    <Panel height="80" name="FeaturePanel" width="1901">
+        <Track attributeKey="Reference sequence" clazz="org.broad.igv.track.SequenceTrack" fontSize="10" id="Reference sequence" name="Reference sequence" sequenceTranslationStrandValue="+" shouldShowTranslation="false" visible="true"/>
+        <Track altColor="0,0,178" attributeKey="RefSeq Genes hg38" clazz="org.broad.igv.track.FeatureTrack" color="0,0,178" colorScale="ContinuousColorScale;0.0;770.0;255,255,255;0,0,178" fontSize="10" groupByStrand="false" height="35" id="hg38_genes" name="RefSeq Genes hg38" visible="true"/>
+    </Panel>
+    <PanelLayout dividerFractions="0.03275109170305677,0.32641921397379914,0.9072052401746725"/>
+    <HiddenAttributes>
+        <Attribute name="DATA FILE"/>
+        <Attribute name="DATA TYPE"/>
+        <Attribute name="NAME"/>
+    </HiddenAttributes>
+</Session>

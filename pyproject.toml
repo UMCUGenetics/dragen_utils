@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "Utility commands for pipelines using Illumina Dragen, bundled as a single installable package."
 readme = "README.md"
 authors = [
-    { name = "Bioinformatica Genetica", email = "bioinformatica-genetica@umcutrecht.nl" }
+    { name = "Bioinformatica Genetica", email = "bioinformatica-genetica@umcutrecht.nl" },
 ]
 requires-python = "~=3.14.0"
 dependencies = [
@@ -17,7 +17,7 @@ dev = [
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
     "pytest-mock>=3.15.1",
-    "ruff>=0.15.20",
+    "ruff>=0.16.10",
 ]
 
 [project.scripts]
@@ -29,7 +29,6 @@ build-backend = "uv_build"
 
 [tool.ruff]
 line-length = 127
-
 
 [tool.ruff.lint]
 extend-select = [
@@ -51,12 +50,12 @@ extend-select = [
 ]
 
 ignore = [
-    "RUF100", # Some imports are considered unused but are needed for the module to work
+    "RUF100", # Unsafe fix: Removed noqa directives that were still necessary.
     "SIM105", # Explicit try/except can be clearer then contextlib.suppress when exception handling has intentional semantics
     "SIM108", # Ternary expressions can reduce readability for complex or multi-line conditions
     "UP012",  # Explicit string conversion can make the intended type conversion clearer
     "UP015",  # Explicit open modes can make file behavior more obvious
-    "UP030",  # Keep %-style formatting where it improves readability or matches existing code
+    "UP030",  # Allow implicit and explicit positional references in string formatting.
 ]
 
 [tool.ruff.lint.flake8-unused-arguments]
@@ -70,5 +69,5 @@ convention = "google"
 
 [tool.uv]
 required-version = ">=0.11.28"
-package=true
+package = true
 exclude-newer = "7 days"

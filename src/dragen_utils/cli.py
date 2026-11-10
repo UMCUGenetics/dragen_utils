@@ -17,6 +17,7 @@ def _version_callback(show_version: bool) -> None:
 
     Args:
         show_version: Whether to show the version and exit.
+
     """
     if show_version:
         typer.echo(package_version("dragen-utils"))

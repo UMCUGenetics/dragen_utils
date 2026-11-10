@@ -64,7 +64,12 @@ def test_igv_session(mocker: MockerFixture) -> None:
     command = next(command for command in igv_session.cli.registered_commands if command.name == "igv_session")
     mock_callback = mocker.patch.object(command, "callback", autospec=True)
 
-    result = runner.invoke(cli.cli, ["igv_session", "HG002"])
+    result = runner.invoke(cli.cli, ["igv_session", "HG002", "HG002.bam", "HG002.tn.bw", "HG002.hard-filtered.baf.bw"])
 
     assert result.exit_code == 0
-    mock_callback.assert_called_once_with(samplename="HG002")
+    mock_callback.assert_called_once_with(
+        sample_id="HG002",
+        bam=Path("HG002.bam"),
+        tn_bw=Path("HG002.tn.bw"),
+        filtered_baf_bw=Path("HG002.hard-filtered.baf.bw"),
+    )

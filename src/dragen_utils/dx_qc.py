@@ -1,3 +1,5 @@
+"""Generate a QC summary CSV for diagnostic samples from DRAGEN metrics files."""
+
 import csv
 from pathlib import Path
 
@@ -21,7 +23,7 @@ def parse_dragen_metrics_csv(metrics_csv: Path, metric_description: str) -> str:
     csv_description_idx = 2
     csv_value_idx = 3
 
-    with open(metrics_csv, "r") as file:
+    with Path(metrics_csv).open("r") as file:
         reader = csv.reader(file)
         for row in reader:
             if row and row[csv_description_idx] == metric_description:
@@ -32,7 +34,7 @@ def transform_karyotype_value(dragen_karyotype: str) -> str:
     """Transform DRAGEN ploidy estimation value karyotype to 'man', 'vrouw', or 'onbekend'. To avoid incidental findings.
 
     Args:
-        karyotype: Karyotype string from DRAGEN.
+        dragen_karyotype: Karyotype string from DRAGEN.
 
     Returns:
         The translated sex label ('man', 'vrouw' or 'onbekend').
@@ -56,7 +58,7 @@ def main(
     ploidy_estimation_metrics_csv: Path,
     callability_metrics_csv: Path,
 ) -> None:
-    """Main function to parse dragen QC metrics csv files and generate a CSV file with QC values used to asses quality of diagnostic samples.
+    """Generate QC values used to assess the quality of a sample.
 
     Args:
         sample_id: Sample ID to use for output file naming.
@@ -66,7 +68,6 @@ def main(
         ploidy_estimation_metrics_csv: Path to the ploidy estimation metrics CSV file.
         callability_metrics_csv: Path to the gvcf metrics CSV file.
     """
-
     # Get QC values from DRAGEN metrics CSV files
     coverage = parse_dragen_metrics_csv(coverage_metrics_csv, "Average alignment coverage over genome")
     cnv_coverage_uniformity = parse_dragen_metrics_csv(cnv_metrics_csv, "Coverage uniformity")

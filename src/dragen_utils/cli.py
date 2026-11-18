@@ -1,3 +1,5 @@
+"""Command-line interface for the dragen-utils package."""
+
 from importlib.metadata import version as package_version
 from typing import Annotated
 
@@ -11,7 +13,9 @@ cli.add_typer(dx_qc.cli)
 
 
 def _version_callback(show_version: bool) -> None:
-    """Version callback for the CLI. If `show_version` is True, prints the package version and exits.
+    """Version callback for the CLI.
+
+    If `show_version` is True, prints the package version and exits.
     The Nextflow modules capture this output into their `versions` topic, so it must be the bare version and nothing else.
 
     Args:
@@ -29,7 +33,6 @@ def _cli_options(
     ] = False,
 ) -> None:
     """Dragen-utils is a collection of utilities for working with Illumina DRAGEN."""
-    pass
 
 
 if __name__ == "__main__":

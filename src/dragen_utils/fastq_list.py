@@ -1,4 +1,4 @@
-"""Find fastq files and generate a CSV file which can be used as input for DRAGEN (--fastq-list)."""
+"""Find fastq files and generate a CSV file which can be used as input for DRAGEN."""
 
 import gzip
 from pathlib import Path

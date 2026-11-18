@@ -1,4 +1,4 @@
-"""Generate a QC summary CSV for diagnostic samples from DRAGEN metrics files."""
+"""Generate a QC summary CSV for samples from DRAGEN metrics files."""
 
 import csv
 from pathlib import Path

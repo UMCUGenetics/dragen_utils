@@ -1,7 +1,4 @@
-"""Top-level CLI for the dragen-utils package.
-
-This module defines the Typer application for the DRAGEN-related utilities exposed by the package.
-"""
+"""Command-line interface for the dragen-utils package."""
 
 from importlib.metadata import version as package_version
 from typing import Annotated

@@ -11,6 +11,7 @@ Utility commands for nextflow pipelines using Illumina Dragen, bundled as a sing
 | ------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `dragen-utils fastq_list` | Generate csv file which can be used as input for Dragen --fastq-list   | [dragenutils/fastqlist](https://github.com/UMCUGenetics/NF-Modules/tree/main/modules/UMCUGenetics/dragenutils/fastqlist/main.nf) |
 | `dragen-utils dx_qc`      | Generate csv file with QC statistics relevant for diagnostic sample QC | [dragenutils/dxqc](https://github.com/UMCUGenetics/NF-Modules/tree/main/modules/UMCUGenetics/dragenutils/dxqc/main.nf)           |
+| `dragen-utils igv_session` | Render an IGV session XML file for a sample from the Jinja template  |                                                                                                                                  |
 
 ## Container image
 
@@ -38,7 +39,8 @@ docker build -t dragen-utils:dev .
 Setup and run the test suite:
 
 ```sh
-uv sync
+uv sync --dev
+uvx pre-commit install
 uv run pytest tests
 ```
 

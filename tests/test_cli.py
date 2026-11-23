@@ -3,7 +3,7 @@ from pathlib import Path
 from pytest_mock import MockerFixture
 from typer.testing import CliRunner
 
-from dragen_utils import cli, dx_qc, fastq_list
+from dragen_utils import cli, dx_qc, fastq_list, igv_session
 
 runner = CliRunner()
 
@@ -57,3 +57,19 @@ def test_dx_qc_no_args(mocker: MockerFixture) -> None:
 
     assert result.exit_code == 2
     mock_callback.assert_not_called()
+
+
+def test_igv_session(mocker: MockerFixture) -> None:
+    """Test that the igv_session command is registered and can be invoked."""
+    command = next(command for command in igv_session.cli.registered_commands if command.name == "igv_session")
+    mock_callback = mocker.patch.object(command, "callback", autospec=True)
+
+    result = runner.invoke(cli.cli, ["igv_session", "HG002", "HG002.bam", "HG002.tn.bw", "HG002.hard-filtered.baf.bw"])
+
+    assert result.exit_code == 0
+    mock_callback.assert_called_once_with(
+        sample_id="HG002",
+        bam=Path("HG002.bam"),
+        tn_bw=Path("HG002.tn.bw"),
+        filtered_baf_bw=Path("HG002.hard-filtered.baf.bw"),
+    )

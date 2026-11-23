@@ -21,7 +21,7 @@ def render_igv_session(sample_id: str, bam: Path, tn_bw: Path, filtered_baf_bw: 
     )
     xml_template_name = "IGV_srWGS_SampleQC_session.xml"
     template = jinja_env.get_template(xml_template_name)
-    # remove full path to allow XML file to be copied to other location.
+    # Only use filename. Nextflow handles file publishing.
     template_data = {"bam": bam.name, "tn_bw": tn_bw.name, "filtered_baf_bw": filtered_baf_bw.name}
     rendered_template = template.render(template_data=template_data)
     xml_path_out = Path(f"{sample_id}_{xml_template_name}")
